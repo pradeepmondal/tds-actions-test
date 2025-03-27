@@ -1,11 +1,6 @@
 name: Daily Commit Workflow
 
-on:
-  schedule:
-    # Run at 10:30 AM UTC every day
-    - cron: '44 15 * * *'
-  # Optional: Allow manual triggering for testing
-  workflow_dispatch:
+on: push
 
 jobs:
   create-daily-commit:
