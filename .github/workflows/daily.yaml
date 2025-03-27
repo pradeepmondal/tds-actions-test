@@ -1,0 +1,32 @@
+name: Daily Commit Workflow
+
+on:
+  schedule:
+    # Run at 10:30 AM UTC every day
+    - cron: '44 15 * * *'
+  # Optional: Allow manual triggering for testing
+  workflow_dispatch:
+
+jobs:
+  create-daily-commit:
+    runs-on: ubuntu-latest
+    permissions:
+      contents: write
+    
+    steps:
+      - name: Checkout repository
+        uses: actions/checkout@v4
+      
+      - name: 21f2000709@ds.study.iitm.ac.in
+        run: |
+          git pull  
+          echo "Last updated: $(date)" > update.txt
+          
+      
+      - name: Commit and push changes
+        run: |
+          git config --local user.email "tds@dummy"
+          git config --local user.name "tds-solver"
+          git add update.txt  
+          git commit -m "Routine change done" || exit 0
+          git push
